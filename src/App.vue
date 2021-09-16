@@ -1,15 +1,19 @@
 <script>
-import MCheckbox from "./components/MCheckbox";
+//import XCheckbox from "./components/XCheckbox"
+import XCustomCheckbox from "./components/XCustomCheckbox"
+import XSwitch from "./components/XSwitch"
 
 export default {
   name: 'App',
   components: {
-    MCheckbox
+    // XCheckbox, XCustomCheckbox
+    XCustomCheckbox, XSwitch
   },
   data() {
     return {
       form: {
-        rememberMe: true
+        rememberMe: true,
+        isSwitched: false,
       }
     }
   },
@@ -24,8 +28,14 @@ export default {
 
 <template>
   <div id="app" class="section">
-    <div class="container">
-      <MCheckbox v-model="form.rememberMe" />
+    <div class="container content">
+<!--      <XCheckbox v-model="form.rememberMe" />-->
+      <p>
+        <XCustomCheckbox v-model="form.rememberMe" />
+      </p>
+      <p>
+        <XSwitch v-model="form.isSwitched" />
+      </p>
     </div>
   </div>
 </template>
