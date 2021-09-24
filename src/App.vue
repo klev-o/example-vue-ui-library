@@ -6,12 +6,23 @@ import XRadio from "./components/XRadio"
 import XInput from "./components/XInput"
 import XTabs from "./components/XTabs"
 import XTab from "./components/XTab"
+import XDropdown from './components/XDropdown.vue';
+import XDropdownItem from './components/XDropdownItem.vue';
+import XDropdownDivider from './components/XDropdownDivider.vue';
 
 export default {
   name: 'App',
   components: {
     XCheckbox,
-    XCustomCheckbox, XSwitch, XRadio, XInput, XTabs, XTab
+    XCustomCheckbox,
+    XSwitch,
+    XRadio,
+    XInput,
+    XTabs,
+    XTab,
+    XDropdown,
+    XDropdownItem,
+    XDropdownDivider,
   },
   data() {
     return {
@@ -24,6 +35,7 @@ export default {
       },
       tabs: ['First', 'Second', 'Third', 4],
       hardCodedTabIsDeleted: false,
+      dropdownIsOpen: false,
     }
   },
   methods : {
@@ -94,26 +106,51 @@ export default {
         </XInput>
       </p>
 
-      <XTabs>
-        <XTab v-if="!hardCodedTabIsDeleted" navigation="First tab">
-          First content
-          <button class="button is-danger" @click="hardCodedTabIsDeleted = true">
-            delete
-          </button>
-        </XTab>
-        <XTab v-for="i in tabs" :key="i" :navigation="`item ${i}`">
-          Content {{ i }}
-          <button class="button is-danger" @click="removeTab(i)">
-            delete
-          </button>
-        </XTab>
-      </XTabs>
+      <div class="block">
+        <XTabs>
+          <XTab v-if="!hardCodedTabIsDeleted" navigation="First tab">
+            First content
+            <button class="button is-danger" @click="hardCodedTabIsDeleted = true">
+              delete
+            </button>
+          </XTab>
+          <XTab v-for="i in tabs" :key="i" :navigation="`item ${i}`">
+            Content {{ i }}
+            <button class="button is-danger" @click="removeTab(i)">
+              delete
+            </button>
+          </XTab>
+        </XTabs>
 
-      <button class="button" @click="tabs.push(tabs.length)">
-        Add tab
-      </button>
+        <button class="button" @click="tabs.push(tabs.length)">
+          Add tab
+        </button>
+      </div>
 
+      <div class="block">
+        <XDropdown :active.sync="dropdownIsOpen"> <!-- @update:active="dropdownIsOpen = $event" -->
+          <template #trigger>
+            <button class="button is-primary">
+              Trigger
+            </button>
+          </template>
 
+          <XDropdownItem tag="a" href="#">
+            Item 1
+          </XDropdownItem>
+          <XDropdownItem>
+            Item 2
+          </XDropdownItem>
+          <XDropdownDivider />
+          <XDropdownItem tag="a">
+            Item 3
+          </XDropdownItem>
+        </XDropdown>
+
+        <button class="button" @click="dropdownIsOpen = !dropdownIsOpen">
+          Toggle dropdown
+        </button>
+      </div>
     </div>
   </div>
 </template>
