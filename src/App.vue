@@ -9,6 +9,7 @@ import XTab from "./components/XTab"
 import XDropdown from './components/XDropdown.vue';
 import XDropdownItem from './components/XDropdownItem.vue';
 import XDropdownDivider from './components/XDropdownDivider.vue';
+import XConfirmationCode from './components/XConfirmationCode.vue';
 
 export default {
   name: 'App',
@@ -23,6 +24,7 @@ export default {
     XDropdown,
     XDropdownItem,
     XDropdownDivider,
+    XConfirmationCode
   },
   data() {
     return {
@@ -32,6 +34,7 @@ export default {
         radio: 'type1',
         name: '',
         email: '',
+        confirmationCode: '1234'
       },
       tabs: ['First', 'Second', 'Third', 4],
       hardCodedTabIsDeleted: false,
@@ -150,6 +153,14 @@ export default {
         <button class="button" @click="dropdownIsOpen = !dropdownIsOpen">
           Toggle dropdown
         </button>
+      </div>
+
+      <div class="block">
+        <XConfirmationCode
+            v-model="form.confirmationCode"
+            :total="4"
+            autofocus
+        />
       </div>
     </div>
   </div>
