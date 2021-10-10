@@ -11,6 +11,7 @@ import XDropdownItem from './components/XDropdownItem.vue';
 import XDropdownDivider from './components/XDropdownDivider.vue';
 import XConfirmationCode from './components/XConfirmationCode.vue';
 import XButton from './components/XButton.vue';
+import XModal from './components/XModal.vue';
 
 export default {
   name: 'App',
@@ -26,7 +27,8 @@ export default {
     XDropdownItem,
     XDropdownDivider,
     XConfirmationCode,
-    XButton
+    XButton,
+    XModal
   },
   data() {
     return {
@@ -41,6 +43,8 @@ export default {
       tabs: ['First', 'Second', 'Third', 4],
       hardCodedTabIsDeleted: false,
       dropdownIsOpen: false,
+      isModalOpen1: false,
+      isModalOpen2: false,
     }
   },
   methods : {
@@ -185,6 +189,27 @@ export default {
           i'm a btn
         </XButton>
       </div>
+
+      <div class="block">
+        <XModal v-if="isModalOpen1" :active.sync="isModalOpen1">
+          <div class="box">
+            I'm the modal 1
+          </div>
+        </XModal>
+        <XModal :active.sync="isModalOpen2" card>
+          i'm a modal 2
+        </XModal>
+
+        <button class="button" @click="isModalOpen1 = !isModalOpen1">
+          toggle modal 1
+        </button>
+        <button class="button" @click="isModalOpen2 = !isModalOpen2">
+          toggle modal 2
+        </button>
+      </div>
+
+
+
     </div>
   </div>
 </template>
