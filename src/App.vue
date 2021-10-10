@@ -10,6 +10,7 @@ import XDropdown from './components/XDropdown.vue';
 import XDropdownItem from './components/XDropdownItem.vue';
 import XDropdownDivider from './components/XDropdownDivider.vue';
 import XConfirmationCode from './components/XConfirmationCode.vue';
+import XButton from './components/XButton.vue';
 
 export default {
   name: 'App',
@@ -24,7 +25,8 @@ export default {
     XDropdown,
     XDropdownItem,
     XDropdownDivider,
-    XConfirmationCode
+    XConfirmationCode,
+    XButton
   },
   data() {
     return {
@@ -48,6 +50,9 @@ export default {
     // }
     removeTab(tab) {
       this.tabs = this.tabs.filter(v => v !== tab);
+    },
+    sayHello() {
+      window.alert('hello');
     },
   }
 }
@@ -161,6 +166,24 @@ export default {
             :total="4"
             autofocus
         />
+      </div>
+
+      <div class="block">
+        <XButton
+            class="has-text-weight-bold"
+            tag="a" href="#" type="danger"
+            size="large" rounded light>i'm a btn</XButton>
+      </div>
+      <div class="block">
+        <XButton type="primary" size="small" outlined>i'm a btn</XButton>
+      </div>
+      <div class="block">
+        <XButton type="success" size="medium" inverted>i'm a btn</XButton>
+      </div>
+      <div class="block">
+        <XButton type="info" @click="sayHello" :loading="false">
+          i'm a btn
+        </XButton>
       </div>
     </div>
   </div>
