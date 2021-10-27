@@ -12,6 +12,9 @@ import XDropdownDivider from './components/XDropdownDivider.vue';
 import XConfirmationCode from './components/XConfirmationCode.vue';
 import XButton from './components/XButton.vue';
 import XModal from './components/XModal.vue';
+import XDialog from './components/XDialog.vue';
+//import Vue from 'vue'
+import XProgramaticDialog from './components/XProgramaticDialog.js';
 
 export default {
   name: 'App',
@@ -28,7 +31,8 @@ export default {
     XDropdownDivider,
     XConfirmationCode,
     XButton,
-    XModal
+    XModal,
+    XDialog
   },
   data() {
     return {
@@ -45,6 +49,9 @@ export default {
       dropdownIsOpen: false,
       isModalOpen1: false,
       isModalOpen2: false,
+      isAlertOpen: false,
+      isConfirmOpen: false,
+      isPromptOpen: false,
     }
   },
   methods : {
@@ -57,6 +64,31 @@ export default {
     },
     sayHello() {
       window.alert('hello');
+    },
+    dialogAlertValue(event) {
+      console.log(event)
+    },
+    openDialog(type) {
+      //example
+      // const XDialogClass = Vue.extend(XDialog)
+      // const xDialog = new XDialogClass({
+      //   propsData: {
+      //     type,
+      //     message: 'function based dialog'
+      //   }
+      // })
+      //
+      // const div = document.createElement('div')
+      // document.body.appendChild(div)
+      // xDialog.$mount(div)
+      // console.log('dialog', xDialog)
+      XProgramaticDialog(type, {
+        message: 'I am a dynamic dialog'
+      }, {
+        cancel(value) {
+          console.log('this is cancelled programatically from App.vue', value);
+        },
+      }, this);
     },
   }
 }
@@ -205,6 +237,31 @@ export default {
         </button>
         <button class="button" @click="isModalOpen2 = !isModalOpen2">
           toggle modal 2
+        </button>
+      </div>
+
+      <div class="block">
+        <XDialog :active.sync="isAlertOpen" message="Just an alert" @confirm="dialogAlertValue" />
+        <XDialog :active.sync="isConfirmOpen" message="Are you an adult?" type="confirm" />
+        <XDialog
+            :active.sync="isPromptOpen"
+            message="How old are you?"
+            type="prompt"
+            :input-attrs="{'placeholder': 'Enter somthing'}"
+        />
+
+        <button class="button" @click="openDialog('confirm')">
+          programatically
+        </button>
+
+        <button class="button" @click="isAlertOpen = !isAlertOpen">
+          alert
+        </button>
+        <button class="button" @click="isConfirmOpen = !isConfirmOpen">
+          Confirm
+        </button>
+        <button class="button" @click="isPromptOpen = !isPromptOpen">
+          Prompt
         </button>
       </div>
 
