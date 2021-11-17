@@ -15,6 +15,8 @@ import XModal from './components/XModal.vue';
 import XDialog from './components/XDialog.vue';
 //import Vue from 'vue'
 import XProgramaticDialog from './components/XProgramaticDialog.js';
+import XCountDown from './components/XCountDown';
+import XCountDownWithRootNode from './components/XCountDownWithRootNode';
 
 export default {
   name: 'App',
@@ -32,7 +34,9 @@ export default {
     XConfirmationCode,
     XButton,
     XModal,
-    XDialog
+    XDialog,
+    XCountDown,
+    XCountDownWithRootNode
   },
   data() {
     return {
@@ -263,6 +267,58 @@ export default {
         <button class="button" @click="isPromptOpen = !isPromptOpen">
           Prompt
         </button>
+      </div>
+
+      <div class="block">
+        <XCountDown datetime="2021-11-13T16:30:00">
+          <template #default="{ isPassed, days, hours, minutes, seconds }">
+            <div v-if="isPassed" class="notification is-primary">
+              date passed
+            </div>
+            <div v-else>
+              <div class="box level is-size-1 has-text-weight-bold has-text-danger">
+                <div class="level-item">
+                  {{ days }}d
+                </div>
+                <div class="level-item">
+                  {{ hours }}h
+                </div>
+                <div class="level-item">
+                  {{ minutes }}m
+                </div>
+                <div class="level-item">
+                  {{ seconds }}s
+                </div>
+              </div>
+            </div>
+          </template>
+        </XCountDown>
+      </div>
+
+      <div class="block">
+        <XCountDownWithRootNode datetime="2021-11-13T16:30:00">
+          <template #default="{ isPassed, days, hours, minutes, seconds }">
+            <div v-if="isPassed" class="notification is-primary">
+              date passed
+            </div>
+            <div v-else>
+              <div class="box level is-size-1 has-text-weight-bold has-text-danger">
+                <div class="level-item">
+                  {{ days }}d
+                </div>
+                <div class="level-item">
+                  {{ hours }}h
+                </div>
+                <div class="level-item">
+                  {{ minutes }}m
+                </div>
+                <div class="level-item">
+                  {{ seconds }}s
+                </div>
+              </div>
+            </div>
+          </template>
+        </XCountDownWithRootNode>
       </div>
 
 
